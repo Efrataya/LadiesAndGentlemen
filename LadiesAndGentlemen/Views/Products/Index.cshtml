@@ -1,0 +1,86 @@
+﻿@model IEnumerable<LadiesAndGentlemen.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card" style="width: 14rem;">
+                    <img src="@Html.DisplayFor(modelItem => item.Image)" class="card-img-top">
+
+                    <div class="card-body">
+                        <h8 class="card-text">@Html.DisplayFor(modelItem => item.Description)</h8>
+
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.price)$</p>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            for purchase
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+
+                                        <div class="stamped-added only-tablet-desktop">
+
+                                            <h1>@Html.DisplayFor(modelItem => item.Description)</h1>
+                                        </div>
+                                        <img src="@Html.DisplayFor(modelItem => item.Image)" />
+                                        <div class="price-box">
+                                            <span class="regular-price" id="product-price-86474">
+                                                <span class="price">@Html.DisplayFor(modelItem => item.price)$</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <form  asp-action="Cart">
+                                        <input type="hidden" value="@Html.DisplayFor(modelItem => item.Id)" name="Id" id="Id" />
+
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-dark">add to my cart</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        }
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+
+
+@*<img src="photo\per.jpg" width="250px" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Pink fur shoe</h5>
+                <p class="card-text">120$</p>
+                <a href="#" class="btn btn-primary">For purchase</a>
+            </div>
+        </div>
+    </div>*@
+
+
+
+
+@section Css{
+    <link rel="stylesheet" herf="~/css/product" />
+}
