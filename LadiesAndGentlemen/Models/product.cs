@@ -23,6 +23,7 @@ namespace LadiesAndGentlemen.Models
         public float price { get; set; }
 
        
-        public int CartId { get; set; }
+        public int? CartId { get; set; }
+        public Cart Cart { get; set; }
     }
 }

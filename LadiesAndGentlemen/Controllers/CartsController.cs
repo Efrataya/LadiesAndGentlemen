@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LadiesAndGentlemen.Data;
 using LadiesAndGentlemen.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace LadiesAndGentlemen.Controllers
 {
@@ -54,16 +55,60 @@ namespace LadiesAndGentlemen.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Cart cart)
+        public async Task<IActionResult> Create([Bind("Id")] Cart cart/*, int Id*/)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Add(cart);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            
             return View(cart);
         }
+                //    if (HttpContext.Session.GetString("cart") == null)
+                //    {
+                //        string myString = Id.ToString();
+                //        HttpContext.Session.SetString("cart", myString);
+
+                //        var purchased = from p in _context.Product
+                //                        where Id == p.Id
+                //                        select p;
+                //        foreach (var Product in purchased)
+                //        {
+                //            Product.CartId = cart.Id;
+                //        }
+                //        cart.Products = (ICollection<Product>)purchased;
+                //        _context.Add(cart);
+                //        await _context.SaveChangesAsync();
+
+                //    }
+                //    else
+                //    {
+                //        string productId = HttpContext.Session.GetString("cart");
+                //        productId += ",";
+                //        productId += Id;
+                //        HttpContext.Session.SetString("cart", productId);
+                //        string[] ids = productId.Split(',');
+                //        int[] myInts = ids.Select(int.Parse).ToArray();
+                //        var c = from p in _context.Product
+                //                where myInts.Contains(p.Id)
+                //                select p;
+
+                //        foreach (var Product in c)
+                //        {
+                //            Product.CartId = cart.Id;
+                //        }
+                //        cart.Products = (ICollection<Product>)c;
+                //        _context.Add(cart);
+                //        await _context.SaveChangesAsync();
+                //    }
+                //    return RedirectToAction(nameof(Index));
+                //}
+                //return View(await _context.Cart.Include(x => x.Products).ToListAsync());
+
+           
 
         // GET: Carts/Edit/5
         public async Task<IActionResult> Edit(int? id)

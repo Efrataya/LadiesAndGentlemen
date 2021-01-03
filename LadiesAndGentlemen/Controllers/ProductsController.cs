@@ -52,8 +52,8 @@ namespace LadiesAndGentlemen.Controllers
                 var purchased = from p in _context.Product
                                 where Id == p.Id
                                 select p;
-               
-           
+
+
                 return View(await purchased.ToListAsync());
             }
             else
@@ -67,7 +67,7 @@ namespace LadiesAndGentlemen.Controllers
                 var c = from p in _context.Product
                         where myInts.Contains(p.Id)
                         select p;
-                
+
                 return View(await c.ToListAsync());
             }
 

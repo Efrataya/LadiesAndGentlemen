@@ -9,10 +9,20 @@ namespace LadiesAndGentlemen.Data
 {
     public class LadiesAndGentlemenContext : DbContext
     {
-        public LadiesAndGentlemenContext (DbContextOptions<LadiesAndGentlemenContext> options)
+        public LadiesAndGentlemenContext(DbContextOptions<LadiesAndGentlemenContext> options)
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // configures one-to-many relationship
+            modelBuilder.Entity<Product>()
+                .HasOne<Cart>(s => s.Cart)
+                .WithMany(g => g.Products)
+                .HasForeignKey(s => s.CartId);
+        }
+
 
         public DbSet<LadiesAndGentlemen.Models.Address> Address { get; set; }
 
@@ -29,3 +39,4 @@ namespace LadiesAndGentlemen.Data
         public DbSet<LadiesAndGentlemen.Models.SubCategory> SubCategory { get; set; }
     }
 }
+

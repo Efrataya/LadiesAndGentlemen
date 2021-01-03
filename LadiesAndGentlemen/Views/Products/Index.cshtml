@@ -44,7 +44,7 @@
                                         </div>
 
                                     </div>
-                                    <form  asp-action="Cart">
+                                    <form  asp-controller="Products" asp-action="Cart">
                                         <input type="hidden" value="@Html.DisplayFor(modelItem => item.Id)" name="Id" id="Id" />
 
                                         <div class="modal-footer">
