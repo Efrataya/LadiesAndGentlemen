@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LadiesAndGentlemen.Data;
 using LadiesAndGentlemen.Models;
 using Microsoft.AspNetCore.Http;
+using System.Collections.ObjectModel;
 
 namespace LadiesAndGentlemen.Controllers
 {
@@ -19,6 +20,7 @@ namespace LadiesAndGentlemen.Controllers
         {
             _context = context;
         }
+
 
         // GET: Carts
         public async Task<IActionResult> Index()
@@ -45,9 +47,10 @@ namespace LadiesAndGentlemen.Controllers
         }
 
         // GET: Carts/Create
-        public IActionResult Create()
+        public IActionResult Create( )
         {
-            return View();
+            
+                    return View();
         }
 
         // POST: Carts/Create
@@ -55,63 +58,69 @@ namespace LadiesAndGentlemen.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Cart cart/*, int Id*/)
+        public async Task<IActionResult> CreateCart()
         {
-
-            if (ModelState.IsValid)
+            if (HttpContext.Session.GetString("cart") == null)
             {
+                ViewData["CartError"] = "Your cart is empty!";
+
+                //await _context.SaveChangesAsync();
+                //string myString = Id.ToString();
+                //HttpContext.Session.SetString("cart", myString);
+
+                //var purchased = from p in _context.Product
+                //                where Id == p.Id
+                //                select p;
+                //foreach (var product in purchased)
+                //{
+                //    product.CartId = cart.Id;
+                //    product.Cart = cart;
+                //    cart.Products.Add(product);
+                //}
+                //string cartUnit = cart.Id.ToString();
+                //HttpContext.Session.SetString("cartUnit", cartUnit);
+                //return View(cart);
+                return View();
+            }
+            else
+            {
+                Cart cart;
+                cart = new Cart();
+                cart.Products = new List<Product>();
                 _context.Add(cart);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+               string myProduct = HttpContext.Session.GetString("cart");
+                string[] ids = myProduct.Split(',');
+                int[] myInts = ids.Select(int.Parse).ToArray();
+                var c = from p in _context.Product
+                        where myInts.Contains(p.Id)
+                        select p;
+                foreach (var product in c)
+                {
+                    product.CartId = cart.Id;
+                    product.Cart = cart;
+                    cart.Products.Add(product);
+                }
+                string cartUnit = cart.Id.ToString();
+                HttpContext.Session.SetString("cartUnit", cartUnit);
+                
             }
             
-            return View(cart);
+            return RedirectToAction("Create", "Orders");
         }
-                //    if (HttpContext.Session.GetString("cart") == null)
-                //    {
-                //        string myString = Id.ToString();
-                //        HttpContext.Session.SetString("cart", myString);
 
-                //        var purchased = from p in _context.Product
-                //                        where Id == p.Id
-                //                        select p;
-                //        foreach (var Product in purchased)
-                //        {
-                //            Product.CartId = cart.Id;
-                //        }
-                //        cart.Products = (ICollection<Product>)purchased;
-                //        _context.Add(cart);
-                //        await _context.SaveChangesAsync();
 
-                //    }
-                //    else
-                //    {
-                //        string productId = HttpContext.Session.GetString("cart");
-                //        productId += ",";
-                //        productId += Id;
-                //        HttpContext.Session.SetString("cart", productId);
-                //        string[] ids = productId.Split(',');
-                //        int[] myInts = ids.Select(int.Parse).ToArray();
-                //        var c = from p in _context.Product
-                //                where myInts.Contains(p.Id)
-                //                select p;
+        
 
-                //        foreach (var Product in c)
-                //        {
-                //            Product.CartId = cart.Id;
-                //        }
-                //        cart.Products = (ICollection<Product>)c;
-                //        _context.Add(cart);
-                //        await _context.SaveChangesAsync();
-                //    }
-                //    return RedirectToAction(nameof(Index));
-                //}
-                //return View(await _context.Cart.Include(x => x.Products).ToListAsync());
 
-           
+   
 
-        // GET: Carts/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+
+
+
+
+            // GET: Carts/Edit/5
+            public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {

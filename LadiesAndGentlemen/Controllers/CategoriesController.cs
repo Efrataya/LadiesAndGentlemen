@@ -27,7 +27,7 @@ namespace LadiesAndGentlemen.Controllers
         }
 
         // GET: Categories/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, int? id2)
         {
             if (id == null)
             {
@@ -35,15 +35,26 @@ namespace LadiesAndGentlemen.Controllers
             }
 
             var category = await _context.Category
-                .Include(c => c.SubCategory)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
                 return NotFound();
             }
 
+            var p = from product in _context.Product
+                    where product.Category.SubCategory.Id == id
+                    select product;
+
+            if (id2 > 0)
+            {
+                p = p.Where(x => x.Category.Id == id2);
+            }
+           
+            ViewData["products"] = await p.ToListAsync();
+
             return View(category);
         }
+
 
         // GET: Categories/Create
         public IActionResult Create()

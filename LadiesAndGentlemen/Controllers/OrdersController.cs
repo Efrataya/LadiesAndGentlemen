@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LadiesAndGentlemen.Data;
 using LadiesAndGentlemen.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace LadiesAndGentlemen.Controllers
 {
@@ -45,27 +46,47 @@ namespace LadiesAndGentlemen.Controllers
             return View(order);
         }
 
-        // GET: Orders/Create
-        public IActionResult Create()
-        {
-            ViewData["CartId"] = new SelectList(_context.Cart, "Id", "Id");
-            return View();
-        }
+       
 
         // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Sum,CartId")] Order order)
+        public async Task<IActionResult> Create()
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(order);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CartId"] = new SelectList(_context.Cart, "Id", "Id", order.CartId);
+            Order order = new Order();
+            _context.Add(order);
+            await _context.SaveChangesAsync();
+            //order's cart:
+            order.Cart = new Cart();
+            string cartId = HttpContext.Session.GetString("cartUnit");
+            int x = Int32.Parse(cartId);
+            order.CartId = x;
+            var myCart = from chosenCart in _context.Cart
+                         where chosenCart.Id == x
+                         select chosenCart;
+            order.Cart = (Cart)myCart;
+            //order's client:
+            order.Client = new Client();
+            string clientId = HttpContext.Session.GetString("clientId");
+            int y = Int32.Parse(clientId);
+            var myClient = from chosenClient in _context.Client
+                         where chosenClient.Id ==y
+                         select chosenClient;
+            order.Client= (Client)myClient;
+            //order's sum:
+            string sum = HttpContext.Session.GetString("price");
+            float z = Int32.Parse(sum);
+            order.Sum = z;
+            await _context.SaveChangesAsync();
+            //if (ModelState.IsValid)
+            //{
+            //    _context.Add(order);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //ViewData["CartId"] = new SelectList(_context.Cart, "Id", "Id", order.CartId);
             return View(order);
         }
 

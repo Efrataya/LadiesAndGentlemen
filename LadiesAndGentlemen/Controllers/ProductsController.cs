@@ -19,6 +19,39 @@ namespace LadiesAndGentlemen.Controllers
         {
             _context = context;
         }
+        
+
+        public async Task<IActionResult> Details1(int? id, int? id2)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var category = await _context.Category
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            var p = from product in _context.Product
+                    where product.Category.SubCategory.Id == id
+                    select product;
+
+            if (id2 > 0)
+            {
+                p = p.Where(x => x.Category.Id == id2);
+            }
+            return View(await p.ToListAsync());
+            //ViewData["products"] = await p.ToListAsync();
+
+            //return View(category);
+        }
+
+
+
+
 
         // GET: Products
         public async Task<IActionResult> Index()
@@ -46,18 +79,24 @@ namespace LadiesAndGentlemen.Controllers
         {
             if (HttpContext.Session.GetString("cart") == null)
             {
+                HttpContext.Session.SetString("sum", "1");
                 string myString = Id.ToString();
                 HttpContext.Session.SetString("cart", myString);
 
                 var purchased = from p in _context.Product
                                 where Id == p.Id
                                 select p;
-
-
+                string price = purchased.First().price.ToString();
+                HttpContext.Session.SetString("price", price);
                 return View(await purchased.ToListAsync());
             }
             else
             {
+                string sum = HttpContext.Session.GetString("sum");
+                int x = Int32.Parse(sum);
+                x++;
+                string updateSum = x.ToString();
+                HttpContext.Session.SetString("sum", updateSum);
                 string productId = HttpContext.Session.GetString("cart");
                 productId += ",";
                 productId += Id;
@@ -67,7 +106,12 @@ namespace LadiesAndGentlemen.Controllers
                 var c = from p in _context.Product
                         where myInts.Contains(p.Id)
                         select p;
-
+                float finalPrice = 0;
+                HttpContext.Session.SetString("price", "0");
+                foreach (var Product in c)
+                     finalPrice += Product.price;
+                string price =finalPrice.ToString();
+                HttpContext.Session.SetString("price", price);
                 return View(await c.ToListAsync());
             }
 
@@ -81,125 +125,18 @@ namespace LadiesAndGentlemen.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Search(float price)
+        public async Task<IActionResult> Search(float pricee, String Name)
         {
-            var p = from product in _context.Product
-                    where product.price <= price
-                    select product;
-            return View(await p.ToListAsync());
-        }
-        public async Task<IActionResult> SearchName(string Description)
-        {
-            var p = from product in _context.Product
-                    where product.Description.Contains(Description)
-                    select product;
-            return View(await p.ToListAsync());
-        }
-        public async Task<IActionResult> SearchWomen()
-        {
-            var p = from product in _context.Product
-                    where product.Category.Name == "Women"
-                    select product;
-            return View(await p.ToListAsync());
-        }
-        public async Task<IActionResult> SearchMen()
-        {
-            var p = from product in _context.Product
-                    where product.Category.Name == "Men"
-                    select product;
-            return View(await p.ToListAsync());
-        }
-        public async Task<IActionResult> SearchChild()
-        {
-            var p = from product in _context.Product
-                    where product.Category.Name == "Children"
-                    select product;
-            return View(await p.ToListAsync());
-        }
-        public async Task<IActionResult> SearchWomenShirts()
-        {
-            var p = from product in _context.Product
-                    where product.Category.Name == "Shirts"
-                    select product;
-            return View(await p.ToListAsync());
-        }
-        public async Task<IActionResult> SearchWomenShkirs()
-        {
-            var p = from product in _context.Product
-                    where product.Category.Name == "Skirts" 
-                    select product;
-            return View(await p.ToListAsync());
-        }
-        public async Task<IActionResult> SearchWomenDresses()
-        {
-            var p = from product in _context.Product
-                    where product.Category.Name == "Dresses"
-                    select product;
-            return View(await p.ToListAsync());
-        }
-        public async Task<IActionResult> SearchWomenShoes()
-        {
-            var p = from product in _context.Product
-                    where product.Category.Name == "Shoes"
-                    select product;
-            return View(await p.ToListAsync());
+
+            var p2 = from product in _context.Product
+                     where product.price < pricee || product.Description.Contains(Name)
+                     orderby product.price descending
+                     select product;
+
+            return View(await p2.ToListAsync());
         }
 
 
-
-
-
-        public async Task<IActionResult> SearchMenSuits()
-        {
-            var p = from product in _context.Product
-                    where product.Category.Name == "Suits" 
-                    select product;
-            return View(await p.ToListAsync());
-        }
-        public async Task<IActionResult> SearchMenShirts()
-        {
-            var p = from product in _context.Product
-                    where product.Category.Name == "Shirts" 
-                    select product;
-            return View(await p.ToListAsync());
-        }
-        public async Task<IActionResult> SearchMenAccessories()
-        {
-            var p = from product in _context.Product
-                    where product.Category.Name == "Accessories" 
-                    select product;
-            return View(await p.ToListAsync());
-        }
-        public async Task<IActionResult> SearchMenShoes()
-        {
-            var p = from product in _context.Product
-                    where product.Category.Name == "Shoes" 
-                    select product;
-            return View(await p.ToListAsync());
-        }
-
-
-
-
-
-
-
-
-
-        public async Task<IActionResult> SearchChildrenSuits()
-        {
-            var p = from product in _context.Product
-                    where product.Category.Name == "Shoes" 
-                    select product;
-            return View(await p.ToListAsync());
-        }
-        public async Task<IActionResult> SearchChildrenShirts()
-        {
-            var p = from product in _context.Product
-                    where product.Category.Name == "Suits" 
-                    select product;
-            return View(await p.ToListAsync());
-        }
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)

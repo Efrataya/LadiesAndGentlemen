@@ -22,6 +22,7 @@ namespace LadiesAndGentlemen.Controllers
 
         public IActionResult Index()
         {
+          
             //NewMethod();
 
             if (HttpContext.Session.GetString("foo") == null)
@@ -30,7 +31,13 @@ namespace LadiesAndGentlemen.Controllers
             }
             i++;
             return View();
+
+            
+
         }
+
+
+       
 
         //private void NewMethod()
         //{
@@ -60,11 +67,6 @@ namespace LadiesAndGentlemen.Controllers
             return View();
         }
         public IActionResult sending()
-        {
-            return View();
-        }
-
-        public IActionResult cart()
         {
             return View();
         }

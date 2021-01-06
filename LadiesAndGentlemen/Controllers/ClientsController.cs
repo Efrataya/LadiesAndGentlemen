@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LadiesAndGentlemen.Data;
 using LadiesAndGentlemen.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace LadiesAndGentlemen.Controllers
 {
@@ -17,6 +18,38 @@ namespace LadiesAndGentlemen.Controllers
         public ClientsController(LadiesAndGentlemenContext context)
         {
             _context = context;
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: Clients/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([Bind("Id,FirstName,LastName,Password,PhoneNumber,Email,DateOfBirth")] Client client)
+        {
+            var q = from a in _context.Client
+                    where client.FirstName == a.FirstName &&
+                          client.Password == a.Password
+                    select a;
+
+            if (q.Count() > 0)
+            {
+                string myId = q.First().Id.ToString();
+                HttpContext.Session.SetString("clientId", myId);
+                HttpContext.Session.SetString("FirstName", q.First().FirstName);
+                return RedirectToAction(nameof(Index));
+
+            }
+            else
+            {
+                ViewData["Error"] = "User does not exist!";
+            }
+            return View(client);
         }
 
         // GET: Clients
@@ -150,4 +183,5 @@ namespace LadiesAndGentlemen.Controllers
             return _context.Client.Any(e => e.Id == id);
         }
     }
+
 }

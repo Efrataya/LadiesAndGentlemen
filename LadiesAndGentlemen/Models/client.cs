@@ -29,7 +29,7 @@ namespace LadiesAndGentlemen.Models
         public Address Address { get; set; }
 
         [Required(ErrorMessage = "You must enter a phone number")]        
-        [RegularExpression(@"^05[0,2, 3, 4, 8]{1}[-]{0,1}[\s\./0-9]{7}$")]
+        [RegularExpression(@"^05[0,2, 3, 4,5, 8]{1}[-]{0,1}[\s\./0-9]{7}$")]
         public String PhoneNumber { get; set; }
 
         [Display(Name = "Email address")]
