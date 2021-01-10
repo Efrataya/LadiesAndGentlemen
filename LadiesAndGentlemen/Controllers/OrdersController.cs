@@ -59,13 +59,14 @@ namespace LadiesAndGentlemen.Controllers
             _context.Add(order);
             await _context.SaveChangesAsync();
             //order's cart:
-            order.Cart = new Cart();
+            order.Cart = new Cart(); 
             string cartId = HttpContext.Session.GetString("cartUnit");
             int x = Int32.Parse(cartId);
-            order.CartId = x;
+            //order.CartId = x;
             var myCart = from chosenCart in _context.Cart
                          where chosenCart.Id == x
                          select chosenCart;
+            
             order.Cart = (Cart)myCart;
             //order's client:
             order.Client = new Client();

@@ -106,7 +106,7 @@ namespace LadiesAndGentlemen.Controllers
                 
             }
             
-            return RedirectToAction("Create", "Orders");
+            return View();
         }
 
 

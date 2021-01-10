@@ -7,8 +7,16 @@
 <h1>Your Order</h1>
 
 <h4>Order Details:</h4>
-
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@foreach (var item in Model.Cart.Products)
+{
+<table class="table table-bordered">
+    <tr>
+        <th scope="row">
+        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+        <td><img src="@Html.DisplayFor(modelItem => item.Image)" height="80px"></td>
+    </tr>
+</table>
 }
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }

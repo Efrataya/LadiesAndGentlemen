@@ -50,6 +50,32 @@ namespace LadiesAndGentlemen.Controllers
         }
 
 
+        public async Task<IActionResult> Search(String n)
+        {
+
+            int z = 0;
+            if (int.TryParse(n, out z))
+            {
+
+                var p = from product in _context.Product
+                        where product.price <= z
+                        orderby product.price descending
+                        select product;
+                return View(await p.ToListAsync());
+
+            }
+            else
+            {
+                var p = from product in _context.Product
+                        where product.Description.Contains(n)
+                        select product;
+                return View(await p.ToListAsync());
+            }
+
+
+
+
+        }
 
 
 
@@ -116,6 +142,7 @@ namespace LadiesAndGentlemen.Controllers
             }
 
         }
+
 
         public async Task<IActionResult> Search()
         {

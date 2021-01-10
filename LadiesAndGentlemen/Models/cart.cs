@@ -10,6 +10,6 @@ namespace LadiesAndGentlemen.Models
         
         public int Id { get; set; }
         public ICollection<Product> Products { get; set; }
-
+        public int OrderId { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using LadiesAndGentlemen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LadiesAndGentlemen.Migrations
 {
     [DbContext(typeof(LadiesAndGentlemenContext))]
-    partial class LadiesAndGentlemenContextModelSnapshot : ModelSnapshot
+    [Migration("20210106184421_addedOrderId")]
+    partial class addedOrderId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

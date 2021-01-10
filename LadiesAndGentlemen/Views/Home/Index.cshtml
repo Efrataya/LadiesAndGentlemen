@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<img src="photo/logo.PNG" class="logo">
 <div class="text-center">
 
 
@@ -35,7 +35,7 @@
     <div class="row">
         <div class="col-md-4 col-sm-12 col-lg-4">
             <div class="card card1">
-                <a asp-controller="Products" asp-action="Details1(2)"> <img class="card-img-top" src="photo\men-cut.jpg" alt="Card image cap"></a>
+                <a asp-controller="Products" asp-action="Details1" asp-route-id="2"> <img class="card-img-top" src="photo\men-cut.jpg" alt="Card image cap"></a>
                 <div class="card-body">
                     <h5 class="card-title">men<br> collection</h5>
                     <a href="MenAll.html">
@@ -46,7 +46,7 @@
         </div>
         <div class="col-md-4 col-sm-12">
             <div class="card card2">
-                <a href="LaydiesAll.html">
+                <a asp-controller="Products" asp-action="Details1" asp-route-id="1">
                     <img class="card-img-top" src="photo\woman_back-cut-cut.jpg"
                          alt="Card image cap">
                 </a>
@@ -60,7 +60,7 @@
         </div>
         <div class="col-md-4 col-sm-12">
             <div class="card card3">
-                <a href="childrenAll.html">
+                <a asp-controller="Products" asp-action="Details1" asp-route-id="3">
                     <img class="card-img-top" src="photo\children_winter_cut.jpg"
                          alt="Card image cap">
                 </a>

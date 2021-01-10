@@ -1,3 +1,9 @@
+.thank{
+    text-align:center !important
+}
+
+
+
 .form-group {
     margin-left: 50px !important;
     margin-right: 50px !important;
@@ -6,6 +12,7 @@
 .bi {
     color: white;
 }
+
 
 
 
