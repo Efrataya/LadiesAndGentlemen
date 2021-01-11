@@ -119,29 +119,35 @@
                 <form class="form-inline my-2 my-lg-0">
                     @if (@Context.Session.GetString("cart") != null)
                     {
+                      
+                        @if (Context.Session.GetString("sum") != null)
+                        {
+                            <span class="mine bi">
+                                @Context.Session.GetString("sum")
+                            </span>
+                         }
 
+                            <a asp-action="Cart" asp-controller="Products">
 
-                        <a asp-action="Cart" asp-controller="Products">
+                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-cart" fill="currentColor"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                                </svg>
+                            </a>}
 
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart" fill="currentColor"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                        &nbsp; &nbsp;
+                        <a asp-action="LogIn" asp-controller="Clients">
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person-circle"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
+                                <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
                             </svg>
-                        </a>}
+                        </a>
+                        &nbsp; &nbsp;
 
-                    &nbsp; &nbsp;
-                    <a asp-action="LogIn" asp-controller="Clients">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle"
-                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
-                            <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                            <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
-                        </svg>
-                    </a>
-                    &nbsp; &nbsp;
-
-                </form>
+                    </form>
                 <form asp-action="Search" asp-controller="Products">
                     <input placeholder="Enter Name Product" name="Name" autocomplete="off" />
                     <input placeholder="Enter Maximum Price" name="Pricee" autocomplete="off" />
@@ -185,6 +191,7 @@
                         <li><a class="grey-text text-lighten-3" asp-action="LogIn" asp-controller="Clients">Login</a></li>
                         @if (@Context.Session.GetString("cart") != null)
                         {
+
                             <li><a class="grey-text text-lighten-3" asp-action="Cart" asp-controller="Products">Shopping Cart</a></li>
                         }
                         </ul>
