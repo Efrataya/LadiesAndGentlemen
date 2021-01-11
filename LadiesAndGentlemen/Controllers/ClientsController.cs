@@ -42,14 +42,15 @@ namespace LadiesAndGentlemen.Controllers
                 string myId = q.First().Id.ToString();
                 HttpContext.Session.SetString("clientId", myId);
                 HttpContext.Session.SetString("FirstName", q.First().FirstName);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
 
             }
             else
             {
                 ViewData["Error"] = "User does not exist!";
+                
             }
-            return View(client);
+            return RedirectToAction("Create");
         }
 
         // GET: Clients
@@ -93,7 +94,7 @@ namespace LadiesAndGentlemen.Controllers
             {
                 _context.Add(client);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(client);
         }

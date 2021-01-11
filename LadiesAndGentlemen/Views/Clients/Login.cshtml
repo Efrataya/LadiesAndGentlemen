@@ -37,10 +37,14 @@
 </div>
 
 <div>
-    <a asp-controller="Home" asp-action="Index">To Connect</a>
+    <a asp-controller="Clients" asp-action="Create">sign in</a>
 </div>
+<script type="text/javascript">
+    alert("Are you a friend of ours? If not now it's the time");
+</script>
 
 @section Scripts {
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 

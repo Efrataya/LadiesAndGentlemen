@@ -19,7 +19,6 @@
 
 <body>
     <header>
-
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
                     aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,18 +29,11 @@
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">Ladies & Gentlemen</a>
 
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-
-
-
-
-
-
                     <li class="nav-item dropdown">
 
-                        <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details" asp-route-id="1" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="1" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Women
-
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1" asp-route-id2="1">Shirts</a>
@@ -74,9 +66,9 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3" asp-route-id2="9">Suits</a>
+                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3" asp-route-id2="10">Suits</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3" asp-route-id2="10">Accessories</a>
+                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3" asp-route-id2="11">Accessories</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="3">All</a>
                         </div>
@@ -191,8 +183,11 @@
                         <li><a class="grey-text text-lighten-3" asp-action="contcs" asp-controller="Home">Contact</a></li>
                         <li><a class="grey-text text-lighten-3" asp-action="sending" asp-controller="Home">Deliveries</a></li>
                         <li><a class="grey-text text-lighten-3" asp-action="LogIn" asp-controller="Clients">Login</a></li>
-                        <li><a class="grey-text text-lighten-3" asp-action="Cart" asp-controller="Products">Shopping Cart</a></li>
-                    </ul>
+                        @if (@Context.Session.GetString("cart") != null)
+                        {
+                            <li><a class="grey-text text-lighten-3" asp-action="Cart" asp-controller="Products">Shopping Cart</a></li>
+                        }
+                        </ul>
 
                     <a href="https://www.google.co.il/maps/place/%D7%A6%D7%95%D7%9E%D7%AA+%D7%91%D7%99%D7%9C%D7%95%2F%D7%9B%D7%91%D7%99%D7%A9+40%E2%80%AD/31.870148,34.8207927,17z/data=!3m1!4b1!4m5!3m4!1s0x1502b79d51534a83:0x32f9521345bcdead!8m2!3d31.870148!4d34.818604?hl=iw">
                         <img class="mapfooter" src="~/photo/map.PNG">

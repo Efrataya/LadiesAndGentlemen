@@ -30,14 +30,14 @@ namespace LadiesAndGentlemen.Models
 
         [Required(ErrorMessage = "You must enter a phone number")]        
         [RegularExpression(@"^05[0,2, 3, 4,5, 8]{1}[-]{0,1}[\s\./0-9]{7}$")]
+        [DataType(DataType.PhoneNumber)]
         public String PhoneNumber { get; set; }
 
         [Display(Name = "Email address")]
         [Required(ErrorMessage = "The email address is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-
-
 
         public DateTime DateOfBirth { get; set; }//איך מגבילים תאריך
         [RegularExpression(@"(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)")]
