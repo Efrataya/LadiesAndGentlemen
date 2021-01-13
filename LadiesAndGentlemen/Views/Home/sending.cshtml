@@ -3,20 +3,19 @@
     ViewData["Title"] = "sending";
 }
 
-@*<div class="titel">
-        <h1 class="tit">Deliveries</h1>
 
-    </div>*@
 
 
 <div class="container">
+    @*<img src="photo/logo.PNG" class="logo">*@
     <div class="row">
-
+        <div class="col">
+            <h2 class="tit">Deliveries</h2>
+        </div>
         <div class="row ab">
+            <br> <br> <br> <br> <br> <br> <br> <br>
             <br> <br>
-            <div class="tra">
-                <img src="~/photo/travel.PNG" width="1100" height="290">
-            </div>
+
             <input type="text" hidden> The products are delivered through a courier / collection company from the store
 
             The shipping options and the amount of the shipping fee will appear at the end of the order process and will be
@@ -93,31 +92,8 @@
         </div>
     </div>
 </div>
-
-<div class="w3-content w3-section">
-    <img class="mySlides w3-animate-bottom" src="https://scontent.fsdv4-1.fna.fbcdn.net/v/t1.0-9/60451371_10211112302643492_2257947445189148672_n.jpg?_nc_cat=107&ccb=2&_nc_sid=8bfeb9&_nc_ohc=iF8S3pxA4U0AX9IStf3&_nc_ht=scontent.fsdv4-1.fna&oh=f40af85d2cf50d350f76acec6e3aaef4&oe=6024DF59">
-    <img class="mySlides w3-animate-top" src="https://scontent.fsdv4-1.fna.fbcdn.net/v/t1.0-9/60483514_10211117742939496_7799918616811405312_n.jpg?_nc_cat=104&ccb=2&_nc_sid=8bfeb9&_nc_ohc=G9-NFuCV0Z4AX-5QmpO&_nc_ht=scontent.fsdv4-1.fna&oh=5ab772ad69a0d67770beb61840d8a8c5&oe=6022AB10">
-    <img class="mySlides w3-animate-bottom" src="https://scontent.fsdv4-1.fna.fbcdn.net/v/t1.0-9/61121796_10211153545874547_4532497438648303616_n.jpg?_nc_cat=110&ccb=2&_nc_sid=8bfeb9&_nc_ohc=KQDFXCa1s9MAX9k3c1q&_nc_ht=scontent.fsdv4-1.fna&oh=51305a784d5e2543f2c6381529267f66&oe=60233E57" ">
-</div>
-<script>
-var myIndex = 0;
-carousel();
-
-function carousel() {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  myIndex++;
-  if (myIndex > x.length) {myIndex = 1}
-  x[myIndex-1].style.display = "block";
-  setTimeout(carousel, 2500);
-}
-</script>
-
-
 @section Css{
     <link rel="stylesheet" href="~/css/sending.css" />
 }
+
 
