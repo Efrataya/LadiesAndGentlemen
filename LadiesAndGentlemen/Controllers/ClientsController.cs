@@ -56,12 +56,16 @@ namespace LadiesAndGentlemen.Controllers
         // GET: Clients
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             return View(await _context.Client.ToListAsync());
         }
 
         // GET: Clients/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (id == null)
             {
                 return NotFound();
@@ -153,6 +157,8 @@ namespace LadiesAndGentlemen.Controllers
         // GET: Clients/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (id == null)
             {
                 return NotFound();
@@ -173,6 +179,8 @@ namespace LadiesAndGentlemen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             var client = await _context.Client.FindAsync(id);
             _context.Client.Remove(client);
             await _context.SaveChangesAsync();

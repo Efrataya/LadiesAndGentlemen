@@ -127,17 +127,20 @@
                         </a>}
 
                     &nbsp; &nbsp;
-                    <a asp-action="LogIn" asp-controller="Clients">
-                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person-circle"
-                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
-                            <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                            <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
-                        </svg>
-                    </a>
+                    @if (@Context.Session.GetString("FirstName") == null)
+                    {
+                        <a asp-action="LogIn" asp-controller="Clients">
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person-circle"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z" />
+                                <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
+                            </svg>
+                        </a>
+                    }
                     &nbsp; &nbsp;
 
-                </form>
+                    </form>
                 <form asp-action="Search" asp-controller="Products">
                     <input placeholder="Enter Name Product" name="Name" autocomplete="off" />
                     <input placeholder="Enter Maximum Price" name="Pricee" autocomplete="off" />
@@ -193,12 +196,15 @@
                         <li><a class="grey-text text-lighten-3" asp-action="about" asp-controller="Home">About</a></li>
                         <li><a class="grey-text text-lighten-3" asp-action="contcs" asp-controller="Home">Contact</a></li>
                         <li><a class="grey-text text-lighten-3" asp-action="sending" asp-controller="Home">Deliveries</a></li>
-                        <li><a class="grey-text text-lighten-3" asp-action="LogIn" asp-controller="Clients">Login</a></li>
-                        @if (@Context.Session.GetString("cart") != null)
+                        @if (@Context.Session.GetString("FirstName") == null)
                         {
-
-                            <li><a class="grey-text text-lighten-3" asp-action="Cart" asp-controller="Products">Shopping Cart</a></li>
+                            <li><a class="grey-text text-lighten-3" asp-action="LogIn" asp-controller="Clients">Login</a></li>
                         }
+                            @if (@Context.Session.GetString("cart") != null)
+                            {
+
+                                <li><a class="grey-text text-lighten-3" asp-action="Cart" asp-controller="Products">Shopping Cart</a></li>
+                            }
                         </ul>
 
                     <a href="https://www.google.co.il/maps/place/%D7%A6%D7%95%D7%9E%D7%AA+%D7%91%D7%99%D7%9C%D7%95%2F%D7%9B%D7%91%D7%99%D7%A9+40%E2%80%AD/31.870148,34.8207927,17z/data=!3m1!4b1!4m5!3m4!1s0x1502b79d51534a83:0x32f9521345bcdead!8m2!3d31.870148!4d34.818604?hl=iw">

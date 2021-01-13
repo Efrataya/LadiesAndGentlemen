@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LadiesAndGentlemen.Data;
 using LadiesAndGentlemen.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace LadiesAndGentlemen.Controllers
 {
@@ -22,12 +23,16 @@ namespace LadiesAndGentlemen.Controllers
         // GET: SubCategories
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             return View(await _context.SubCategory.ToListAsync());
         }
 
         // GET: SubCategories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (id == null)
             {
                 return NotFound();
@@ -46,6 +51,8 @@ namespace LadiesAndGentlemen.Controllers
         // GET: SubCategories/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             return View();
         }
 
@@ -56,6 +63,8 @@ namespace LadiesAndGentlemen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] SubCategory subCategory)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (ModelState.IsValid)
             {
                 _context.Add(subCategory);
@@ -68,6 +77,10 @@ namespace LadiesAndGentlemen.Controllers
         // GET: SubCategories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (id == null)
             {
                 return NotFound();
@@ -88,6 +101,8 @@ namespace LadiesAndGentlemen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] SubCategory subCategory)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (id != subCategory.Id)
             {
                 return NotFound();
@@ -119,6 +134,8 @@ namespace LadiesAndGentlemen.Controllers
         // GET: SubCategories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (id == null)
             {
                 return NotFound();
@@ -139,6 +156,8 @@ namespace LadiesAndGentlemen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             var subCategory = await _context.SubCategory.FindAsync(id);
             _context.SubCategory.Remove(subCategory);
             await _context.SaveChangesAsync();

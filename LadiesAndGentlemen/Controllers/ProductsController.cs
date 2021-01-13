@@ -82,6 +82,8 @@ namespace LadiesAndGentlemen.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (HttpContext.Session.GetString("cart") == null)
             {
                 return View(await _context.Product.ToListAsync());
@@ -103,6 +105,7 @@ namespace LadiesAndGentlemen.Controllers
         // GET: cart
         public async Task<IActionResult> Cart(int Id)
         {
+
             if (HttpContext.Session.GetString("cart") == null)
             {
                 HttpContext.Session.SetString("sum", "1");
@@ -186,6 +189,8 @@ namespace LadiesAndGentlemen.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             return View();
         }
 
@@ -194,8 +199,10 @@ namespace LadiesAndGentlemen.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Image,Description,price")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Image,Description,price")] Product product  )
         {
+             if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (ModelState.IsValid)
             {
                 _context.Add(product);
@@ -209,6 +216,8 @@ namespace LadiesAndGentlemen.Controllers
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (id == null)
             {
                 return NotFound();
@@ -229,6 +238,8 @@ namespace LadiesAndGentlemen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Image,Description,price")] Product product)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (id != product.Id)
             {
                 return NotFound();
@@ -260,6 +271,8 @@ namespace LadiesAndGentlemen.Controllers
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (id == null)
             {
                 return NotFound();

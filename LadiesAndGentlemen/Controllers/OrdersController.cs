@@ -23,6 +23,8 @@ namespace LadiesAndGentlemen.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             var ladiesAndGentlemenContext = _context.Order.Include(o => o.Cart);
             return View(await ladiesAndGentlemenContext.ToListAsync());
         }
@@ -30,6 +32,8 @@ namespace LadiesAndGentlemen.Controllers
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (id == null)
             {
                 return NotFound();
@@ -94,6 +98,8 @@ namespace LadiesAndGentlemen.Controllers
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (id == null)
             {
                 return NotFound();
@@ -115,6 +121,8 @@ namespace LadiesAndGentlemen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Sum,CartId")] Order order)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (id != order.Id)
             {
                 return NotFound();
@@ -147,6 +155,8 @@ namespace LadiesAndGentlemen.Controllers
         // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             if (id == null)
             {
                 return NotFound();
@@ -168,6 +178,8 @@ namespace LadiesAndGentlemen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
+                return RedirectToAction("Login", "Clients");
             var order = await _context.Order.FindAsync(id);
             _context.Order.Remove(order);
             await _context.SaveChangesAsync();
