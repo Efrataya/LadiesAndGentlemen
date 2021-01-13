@@ -82,8 +82,6 @@ namespace LadiesAndGentlemen.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("FirstName") != "L&G1234")
-                return RedirectToAction("Login", "Clients");
             if (HttpContext.Session.GetString("cart") == null)
             {
                 return View(await _context.Product.ToListAsync());

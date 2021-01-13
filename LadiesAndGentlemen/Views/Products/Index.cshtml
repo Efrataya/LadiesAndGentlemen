@@ -11,6 +11,9 @@
         * {
             box-sizing: border-box;
         }
+        div{
+            margin-top:2px;
+        }
 
         .img-magnifier-container {
             position: relative;
@@ -94,11 +97,12 @@
 
 
 <div class="container">
-
+    
     <div class="row">
         @foreach (var item in Model)
         {
             <div class="col-lg-3 col-md-4 col-sm-6">
+
                 <div class="card" style="width: 14rem; ">
                     <img src="@Html.DisplayFor(modelItem => item.Image)" class="card-img-top">
 
@@ -121,7 +125,7 @@
                                             <h1>@Html.DisplayFor(modelItem => item.Description)</h1>
                                         </div>
                                         <div class="img-magnifier-container">
-                                            <img id="myimage" src="@Html.DisplayFor(modelItem => item.Image)" width="300"  height="400" >
+                                            <img id="myimage" src="@Html.DisplayFor(modelItem => item.Image)" width="300" height="400">
                                         </div>
                                         <div class="price-box">
                                             <span class="regular-price" id="product-price-86474">
@@ -149,29 +153,31 @@
             </div>
 
         }
-    </div>
-</div>
-<script>
-    /* Execute the magnify function: */
-    magnify("myimage", 3);
-    /* Specify the id of the image, and the strength of the magnifier glass: */
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-
-
-
-@*<img src="photo\per.jpg" width="250px" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Pink fur shoe</h5>
-                <p class="card-text">120$</p>
-                <a href="#" class="btn btn-primary">For purchase</a>
-            </div>
         </div>
-    </div>*@
+    
+    </div>
+
+    <script>
+        /* Execute the magnify function: */
+        magnify("myimage", 3);
+            /* Specify the id of the image, and the strength of the magnifier glass: */
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+
+
+    @*<img src="photo\per.jpg" width="250px" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Pink fur shoe</h5>
+                    <p class="card-text">120$</p>
+                    <a href="#" class="btn btn-primary">For purchase</a>
+                </div>
+            </div>
+        </div>*@
 
 
 
 
-@section Css{
-    <link rel="stylesheet" herf="~/css/product" />
-}
+    @section Css{
+        <link rel="stylesheet" herf="~/css/product" />
+    }

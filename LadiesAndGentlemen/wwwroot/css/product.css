@@ -1,6 +1,51 @@
 
+/*
+.card {
+    margin-bottom: 40px;
+}
 
-.bi {
+
+.page-footer {
+    bottom: 0px !important;
+    color: white;
+    background-color: rgb(32, 32, 32) !important;
+    margin-bottom: 0px !important;
+}
+
+
+
+.logofooter {
+    position: absolute;
+    top: 45px;
+    right: 590px;
+    width: 30%;
+    direction: rtl;
+}
+
+.grey-text {
+    color: white !important;
+}
+
+
+
+.mapfooter {
+    position: absolute;
+    top: 30px;
+    right: 1px;
+    width: 40%;
+    direction: rtl;
+}
+
+.container {
+    margin-bottom: 0px !important;
+}
+
+
+
+div {
+    display: block;
+}*/
+/*.bi {
     color: white;
 }
 
@@ -20,9 +65,9 @@ nav-link {
     margin-left: 50px;
 }
 
-.card {
+.card {*/
   /*  margin-bottom: 10px;*/
-}
+/*}
 
 
 
@@ -49,4 +94,4 @@ nav-link {
 
 div {
     display: block;
-}
+}*/
