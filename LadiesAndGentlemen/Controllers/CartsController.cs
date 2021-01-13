@@ -60,6 +60,8 @@ namespace LadiesAndGentlemen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateCart()
         {
+            if (HttpContext.Session.GetString("FirstName") == null)
+                return RedirectToAction("Login", "Clients");
             if (HttpContext.Session.GetString("cart") == null)
             {
                 ViewData["CartError"] = "Your cart is empty!";

@@ -1,4 +1,7 @@
-
+/*.col-lg-3 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}*/
 /*
 .card {
     margin-bottom: 40px;
@@ -95,3 +98,7 @@ nav-link {
 div {
     display: block;
 }*/
+.card{
+    margin-top:60;
+    margin-bottom:40;
+}

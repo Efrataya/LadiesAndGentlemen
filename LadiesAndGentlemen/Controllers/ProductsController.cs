@@ -71,10 +71,6 @@ namespace LadiesAndGentlemen.Controllers
                         select product;
                 return View(await p.ToListAsync());
             }
-
-
-
-
         }
 
 
@@ -99,6 +95,8 @@ namespace LadiesAndGentlemen.Controllers
             }
 
         }
+
+      
 
         // GET: cart
         public async Task<IActionResult> Cart(int Id)

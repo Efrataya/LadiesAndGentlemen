@@ -52,6 +52,11 @@ namespace LadiesAndGentlemen.Controllers
             }
             return RedirectToAction("Create");
         }
+        public async Task<IActionResult> logout()
+        {
+            HttpContext.Session.Remove("FirstName");
+            return RedirectToAction(nameof(Index));
+        }
 
         // GET: Clients
         public async Task<IActionResult> Index()

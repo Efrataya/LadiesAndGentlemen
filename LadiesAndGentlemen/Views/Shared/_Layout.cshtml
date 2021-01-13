@@ -31,7 +31,7 @@
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
 
-                        <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="1" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="2" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Women
                         </a>
@@ -41,12 +41,12 @@
                             <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1" asp-route-id2="3">Dresses</a>
                             <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1" asp-route-id2="4">Shoes</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2">All</a>
+                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1">All</a>
                         </div>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="2" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" asp-controller="Products" asp-action="Details1" asp-route-id="1" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Men
                         </a>
@@ -56,7 +56,7 @@
                             <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2" asp-route-id2="7">Shoes</a>
                             <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2" asp-route-id2="8">Accessories</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="1">All</a>
+                            <a class="dropdown-item" asp-controller="Products" asp-action="Details1" asp-route-id="2">All</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -87,7 +87,7 @@
 
                                     <a class="dropdown-item" asp-action="Create" asp-controller="Products">Add Item</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" asp-action="ManagerIndex" asp-controller="Products">Delete Item</a>
+                                    <a class="dropdown-item" asp-action="Delete" asp-controller="Products">Delete Item</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-action="Edit" asp-controller="Products">Update Item</a>
                                     <div class="dropdown-divider"></div>
@@ -139,8 +139,20 @@
                         </a>
                     }
                     &nbsp; &nbsp;
+                    @if (@Context.Session.GetString("FirstName") != null)
+                    {
+                        <a asp-action="logout" asp-controller="Clients">
+                            &nbsp; &nbsp;
+                            <i class="bi bi-person-x-fill"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor" class="bi bi-person-x-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                            &nbsp; &nbsp;
+                        </a>
+                    }
 
-                    </form>
+
+                </form>
                 <form asp-action="Search" asp-controller="Products">
                     <input placeholder="Enter Name Product" name="Name" autocomplete="off" />
                     <input placeholder="Enter Maximum Price" name="Pricee" autocomplete="off" />
@@ -166,7 +178,7 @@
         }
 
 
-        </header>
+    </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -191,7 +203,7 @@
                     <h5>store@gmail.com</h5>
                 </div>
                 <div class="col l4 offset-l2 s12">
-                    <p  &nbsp; &nbsp</p>
+                    <p &nbsp; &nbsp</p>
                     <ul>
                         <li><a class="grey-text text-lighten-3" asp-action="about" asp-controller="Home">About</a></li>
                         <li><a class="grey-text text-lighten-3" asp-action="contcs" asp-controller="Home">Contact</a></li>
@@ -200,12 +212,12 @@
                         {
                             <li><a class="grey-text text-lighten-3" asp-action="LogIn" asp-controller="Clients">Login</a></li>
                         }
-                            @if (@Context.Session.GetString("cart") != null)
-                            {
+                        @if (@Context.Session.GetString("cart") != null)
+                        {
 
-                                <li><a class="grey-text text-lighten-3" asp-action="Cart" asp-controller="Products">Shopping Cart</a></li>
-                            }
-                        </ul>
+                            <li><a class="grey-text text-lighten-3" asp-action="Cart" asp-controller="Products">Shopping Cart</a></li>
+                        }
+                    </ul>
 
                     <a href="https://www.google.co.il/maps/place/%D7%A6%D7%95%D7%9E%D7%AA+%D7%91%D7%99%D7%9C%D7%95%2F%D7%9B%D7%91%D7%99%D7%A9+40%E2%80%AD/31.870148,34.8207927,17z/data=!3m1!4b1!4m5!3m4!1s0x1502b79d51534a83:0x32f9521345bcdead!8m2!3d31.870148!4d34.818604?hl=iw">
                         <img class="mapfooter" src="~/photo/map.PNG">
